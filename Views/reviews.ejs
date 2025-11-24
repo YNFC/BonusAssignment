@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+<!-- adding the reviews page button -->
+<h2 class="text-center mb-4">User Reviews</h2>
+<div class="text-center mb-3">
+    <a href="/reviews/add" class="btn btn-success">Add Review</a>
+</div>
+<div class="container">
+    <% if (reviews.length === 0) { %>
+        <p class="text-center">No reviews yet. Be the first to add one!</p>
+    <% } %>
+    <% reviews.forEach(r => { %>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5><%= r.name %> — ⭐ <%= r.rating %>/5</h5>
+                <p><%= r.comment %></p>
+                <small class="text-muted"><%= r.date.toDateString() %></small>
+            </div>
+        </div>
+    <% }) %>
+</div>
+<%- include("partials/footer") %>

@@ -1,0 +1,17 @@
+<%- include("partials/header") %>
+<!-- adding maintenince records with this part. -->
+<h2>Add Maintenance Record</h2>
+<form action="/add" method="POST">
+    <label>Service Type:</label>
+    <input name="serviceType" class="form-control" required>
+    <label>Cost ($):</label>
+    <input name="cost" type="number" class="form-control" required>
+    <label>Mileage:</label>
+    <input name="mileage" type="number" class="form-control" required>
+    <label>Date:</label>
+    <input name="date" type="date" class="form-control" required>
+    <label>Notes:</label>
+    <textarea name="notes" class="form-control"></textarea>
+    <button class="btn btn-success mt-3">Add Record</button>
+</form>
+<%- include("partials/footer") %>

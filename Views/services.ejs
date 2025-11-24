@@ -1,0 +1,33 @@
+<%- include("partials/header") %>
+<h2 class="mb-3">Service History</h2>
+<!-- Creating the table to show all the services and their details this parts only the tables columns names. -->
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Service</th>
+            <th>Cost ($)</th>
+            <th>Mileage</th>
+            <th>Date</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+<!-- adding the service details and entery dates. Also delete and edit buttons. -->
+    <tbody>
+        <% services.forEach(service => { %>
+            <tr>
+                <td><%= service.serviceType %></td>
+                <td><%= service.cost %></td>
+                <td><%= service.mileage %></td>
+                <td><%= service.date.toDateString() %></td>
+                <td><%= service.notes %></td>
+                <td>
+                    <a href="/edit/<%= service._id %>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/delete/<%= service._id %>" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this record?');">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
+<%- include("partials/footer") %>

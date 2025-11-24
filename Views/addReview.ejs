@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+<!-- this is the reviews page to add reviews from users. -->
+<h2 class="mb-4 text-center">Add a Review</h2>
+<form action="/reviews/add" method="POST" class="container" style="max-width:600px;">
+    <label class="form-label">Your Name:</label>
+    <input type="text" name="name" class="form-control" required>
+    <label class="form-label mt-3">Rating (1–5):</label>
+    <input type="number" name="rating" min="1" max="5" class="form-control" required>
+    <label class="form-label mt-3">Comment:</label>
+    <textarea name="comment" class="form-control" rows="4" required></textarea>
+    <button class="btn btn-primary mt-4">Submit Review</button>
+</form>
+<%- include("partials/footer") %>

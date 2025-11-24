@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+<h2>Edit Maintenance Record</h2>
+<!-- we are editing the maintenince records here if we accidentally mis spelt or added something incorrect. -->
+<form action="/edit/<%= service._id %>" method="POST">
+    <label>Service Type:</label>
+    <input name="serviceType" class="form-control" value="<%= service.serviceType %>" required>
+    <label>Cost ($):</label>
+    <input name="cost" type="number" class="form-control" value="<%= service.cost %>" required>
+    <label>Mileage:</label>
+    <input name="mileage" type="number" class="form-control" value="<%= service.mileage %>" required>
+    <label>Date:</label>
+    <input name="date" type="date" class="form-control"
+           value="<%= service.date.toISOString().split('T')[0] %>" required>
+    <label>Notes:</label>
+    <textarea name="notes" class="form-control"><%= service.notes %></textarea>
+    <button class="btn btn-primary mt-3">Save Changes</button>
+</form>
+<%- include("partials/footer") %>
