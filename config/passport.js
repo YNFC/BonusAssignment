@@ -3,7 +3,6 @@ const GitHubStrategy = require("passport-github2").Strategy;
 const User = require("../models/User");
 
 
-
 module.exports = function (passport) {
 
     // Save user ID in cookie/session
