@@ -1,25 +1,49 @@
 // building the server
 const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
+require("dotenv").config();
+
 const app = express();
 const path = require("path");
-require("dotenv").config(); //loading the .env file so we can use it securely.
+
+// Connect to MongoDB
 const connectDB = require("./config/database");
+connectDB();
+
+// Routes
 const serviceRoutes = require("./routes/Serviceroutes");
 const reviewRoutes = require("./routes/Reviewroutes");
-// Connecting to MongoDB
-connectDB();
-// Allows the server to read data from HTML <form> elements.
+const authRoutes = require("./routes/authRoutes");
+
+// Passport config
+require("./config/passport")(passport);
+
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// Set EJS
+// EJS Setup
 app.set("view engine", "ejs");
 
-// Directs the server to look at the Routes folder. 
+// Sessions (required for login)
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "supersecret123",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+app.use("/", authRoutes);
 app.use("/", serviceRoutes);
+app.use("/reviews", reviewRoutes);
 
 // Start The Server
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Server running on port 3000");
-});
-app.use("/reviews", reviewRoutes);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
