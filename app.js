@@ -26,6 +26,8 @@ app.use(express.static("public"));
 // EJS Setup
 app.set("view engine", "ejs");
 
+
+
 // Sessions (required for login)
 app.use(
   session({
